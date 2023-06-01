@@ -6,7 +6,7 @@ import { Header } from './Header';
 export function AppShell({ children }: { children: ReactNode }) {
   return (
     <MantineAppShell
-      padding='md'
+      padding='sm'
       navbar={<Navbar />}
       header={<Header />}
       styles={(theme) => ({
