@@ -3,7 +3,7 @@ import { ColorScheme, rem } from '@mantine/core';
 export const OrganisationLogo = ({
   colorScheme,
 }: {
-  colorScheme: ColorScheme;
+  colorScheme?: ColorScheme;
 }) => {
   return (
     <svg

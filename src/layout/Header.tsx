@@ -42,7 +42,7 @@ export function Header() {
     <Box pb={100}>
       <MantineHeader px='md' height={HEADER_HEIGHT} className={classes.header}>
         <Group position='apart' sx={{ height: '100%' }}>
-          <OrganisationLogo size={30} />
+          <OrganisationLogo />
 
           <Group className={classes.hiddenMobile}>
             <Autocomplete
