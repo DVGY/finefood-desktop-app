@@ -88,7 +88,6 @@ export const Navbar = () => {
       <MantineNavbar.Section grow mt='md'>
         <MenuLinks />
       </MantineNavbar.Section>
-      <MantineNavbar.Section>{/* <User />s */}</MantineNavbar.Section>
     </MantineNavbar>
   );
 };
