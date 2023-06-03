@@ -26,7 +26,7 @@ interface MainLinkProps {
 const useStyles = createStyles((theme) => ({
   navbar: {
     height: '100%',
-    backgroundColor: theme.colors.gray[5],
+    // backgroundColor: theme.colors.gray[5],
   },
 }));
 

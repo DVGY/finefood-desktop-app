@@ -4,11 +4,9 @@ import {
   Group,
   Button,
   Box,
-  Burger,
   rem,
   Autocomplete,
 } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
 import { IconSearch } from '@tabler/icons-react';
 import { OrganisationLogo } from './OrganisationLogo';
 
@@ -22,7 +20,7 @@ const useStyles = createStyles((theme) => ({
   },
 
   header: {
-    backgroundColor: theme.colors.gray[2],
+    // backgroundColor: theme.colors.gray[2],
   },
   hiddenMobile: {
     [theme.fn.smallerThan('sm')]: {

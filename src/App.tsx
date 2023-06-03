@@ -6,7 +6,7 @@ import './App.css';
 const useStyles = createStyles({
   container: {
     height: '100%',
-    backgroundColor: 'gray',
+    // backgroundColor: 'gray',
   },
 });
 

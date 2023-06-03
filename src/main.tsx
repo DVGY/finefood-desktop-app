@@ -8,7 +8,11 @@ import { AppShell } from './layout';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
-    <MantineProvider withGlobalStyles withNormalizeCSS>
+    <MantineProvider
+      theme={{ colorScheme: 'light' }}
+      withGlobalStyles
+      withNormalizeCSS
+    >
       <AppShell>
         <App />
       </AppShell>
