@@ -1,7 +1,9 @@
-import { useState } from 'react';
 import { createStyles, Container } from '@mantine/core';
-import { invoke } from '@tauri-apps/api/tauri';
 import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import { Dashboard } from './pages/Dashboard';
+import { RouteList } from './common/route/routeList';
+import { Orders } from './pages/Orders';
 
 const useStyles = createStyles({
   container: {
@@ -11,18 +13,13 @@ const useStyles = createStyles({
 });
 
 function App() {
-  const [greetMsg, setGreetMsg] = useState('');
-  const [name, setName] = useState('');
   const { classes } = useStyles();
-
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-    setGreetMsg(await invoke('greet', { name }));
-  }
-
   return (
     <Container className={classes.container} fluid>
-      <h1>Welcome to Fine Food Dashboard</h1>
+      <Routes>
+        <Route path={RouteList.DASHBOARD} element={<Dashboard />} />
+        <Route path={RouteList.ORDERS} element={<Orders />} />
+      </Routes>
     </Container>
   );
 }

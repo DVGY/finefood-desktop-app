@@ -16,11 +16,14 @@ import {
   IconSoup,
   IconUsers,
 } from '@tabler/icons-react';
+import { NavLink } from 'react-router-dom';
+import { RouteList } from '../common/route/routeList';
 
 interface MainLinkProps {
   icon: React.ReactNode;
   color?: string;
   label: string;
+  linkTo: RouteList;
 }
 
 const useStyles = createStyles((theme) => ({
@@ -31,43 +34,45 @@ const useStyles = createStyles((theme) => ({
 }));
 
 const MenuLinkConfig = [
-  { link: '', label: 'Home', icon: <IconHome2 /> },
-  { link: '', label: 'Orders', icon: <IconPackage /> },
-  { link: '', label: 'Users', icon: <IconUsers /> },
-  { link: '', label: 'Products', icon: <IconSoup /> },
-  { link: '', label: 'Stores', icon: <IconBuildingStore /> },
-  { link: '', label: 'Logout', icon: <IconLogout /> },
+  { linkTo: RouteList.DASHBOARD, label: 'Dashboard', icon: <IconHome2 /> },
+  { linkTo: RouteList.ORDERS, label: 'Orders', icon: <IconPackage /> },
+  { linkTo: RouteList.USERS, label: 'Users', icon: <IconUsers /> },
+  { linkTo: RouteList.PRODUCTS, label: 'Products', icon: <IconSoup /> },
+  { linkTo: RouteList.STORES, label: 'Stores', icon: <IconBuildingStore /> },
+  { linkTo: RouteList.LOGOUT, label: 'Logout', icon: <IconLogout /> },
 ];
 
-function MenuLink({ icon, color, label }: MainLinkProps) {
+function MenuLink({ icon, color, label, linkTo }: MainLinkProps) {
   return (
-    <UnstyledButton
-      sx={(theme) => ({
-        display: 'block',
-        width: '100%',
-        padding: theme.spacing.xs,
-        borderRadius: theme.radius.sm,
-        color:
-          theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+    <NavLink to={linkTo}>
+      <UnstyledButton
+        sx={(theme) => ({
+          display: 'block',
+          width: '100%',
+          padding: theme.spacing.xs,
+          borderRadius: theme.radius.sm,
+          color:
+            theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
 
-        '&:hover': {
-          backgroundColor:
-            theme.colorScheme === 'dark'
-              ? theme.colors.dark[6]
-              : theme.colors.gray[0],
-        },
-      })}
-    >
-      <Group>
-        <ThemeIcon color={color} variant='light'>
-          {icon}
-        </ThemeIcon>
-
-        <Text size='sm'>{label}</Text>
-      </Group>
-    </UnstyledButton>
+          '&:hover': {
+            backgroundColor:
+              theme.colorScheme === 'dark'
+                ? theme.colors.dark[6]
+                : theme.colors.gray[0],
+          },
+        })}
+      >
+        <Group>
+          <ThemeIcon color={color} variant='light'>
+            {icon}
+          </ThemeIcon>
+          <Text>{label}</Text>
+        </Group>
+      </UnstyledButton>
+    </NavLink>
   );
 }
+
 export function MenuLinks() {
   const links = MenuLinkConfig.map((link) => (
     <MenuLink {...link} key={link.label} />

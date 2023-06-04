@@ -1,7 +1,8 @@
 import { AppShell as MantineAppShell } from '@mantine/core';
 import { ReactNode } from 'react';
-import { Navbar } from './Navbar';
-import { Header } from './Header';
+
+import { Navbar } from '@layout/Navbar';
+import { Header } from '@layout/Header';
 
 export function AppShell({ children }: { children: ReactNode }) {
   return (

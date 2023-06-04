@@ -8,6 +8,7 @@ import {
   Autocomplete,
 } from '@mantine/core';
 import { IconSearch } from '@tabler/icons-react';
+
 import { OrganisationLogo } from './OrganisationLogo';
 
 const HEADER_HEIGHT = rem(84);
