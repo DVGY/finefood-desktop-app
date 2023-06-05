@@ -1,8 +1,10 @@
+import { ResourceList } from './resourceList';
+
 export const enum RouteList {
-  DASHBOARD = '/dashboard',
-  ORDERS = '/orders',
-  USERS = '/users',
-  PRODUCTS = '/products',
-  STORES = '/stores',
-  LOGOUT = '/logout',
+  DASHBOARD = `/${ResourceList.DASHBOARD}`,
+  ORDERS = `/${ResourceList.ORDERS}`,
+  USERS = `/${ResourceList.USERS}`,
+  PRODUCTS = `/${ResourceList.PRODUCTS}`,
+  STORES = `/${ResourceList.STORES}`,
+  LOGOUT = `/${ResourceList.LOGOUT}`,
 }

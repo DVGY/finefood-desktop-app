@@ -17,7 +17,7 @@ import {
   IconUsers,
 } from '@tabler/icons-react';
 import { NavLink } from 'react-router-dom';
-import { RouteList } from '../common/route/routeList';
+import { RouteList } from '@common/route';
 
 interface MainLinkProps {
   icon: React.ReactNode;

@@ -1,31 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import {
-  createBrowserRouter,
-  RouterProvider,
-  BrowserRouter,
-} from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { MantineProvider } from '@mantine/core';
+import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 
 import App from './App';
 import './styles.css';
-import { AppShell } from './layout';
-import ErrorBoundray from './common/error/ErrorBoundray';
+import { AppShell } from '@layout/appshell';
+import { ErrorBoundray } from '@common/components/error';
+
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <ErrorBoundray>
-      <BrowserRouter>
-        <MantineProvider
-          theme={{ colorScheme: 'light' }}
-          withGlobalStyles
-          withNormalizeCSS
-        >
-          <AppShell>
-            <App />
-          </AppShell>
-        </MantineProvider>
-      </BrowserRouter>
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <MantineProvider
+            theme={{ colorScheme: 'light' }}
+            withGlobalStyles
+            withNormalizeCSS
+          >
+            <AppShell>
+              <App />
+            </AppShell>
+          </MantineProvider>
+        </BrowserRouter>
+      </QueryClientProvider>
     </ErrorBoundray>
   </React.StrictMode>
 );

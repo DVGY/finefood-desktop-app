@@ -4,7 +4,7 @@ interface ErrorBoundaryProps {
   children: ReactNode;
 }
 
-export default class ErrorBoundray extends Component<ErrorBoundaryProps> {
+export class ErrorBoundray extends Component<ErrorBoundaryProps> {
   state = { hasError: false };
 
   static getDerivedStateFromError(error: Error) {
