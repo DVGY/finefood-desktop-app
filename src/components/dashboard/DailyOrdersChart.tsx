@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
   Bar,
@@ -7,13 +7,13 @@ import {
   ResponsiveContainer,
   XAxis,
   Label,
-} from 'recharts';
+} from "recharts";
+import { useMantineTheme } from "@mantine/core";
 
-import { ResourceList } from '@common/route';
-import { dailyOrderQueryKey } from '@common/react-query';
-import { Loading } from '@common/components/loading';
-import { ApiError } from '@common/components/error';
-import { useMantineTheme } from '@mantine/core';
+import { ResourceList } from "@common/route";
+import { dailyOrderQueryKey } from "@common/react-query";
+import { Loading } from "@common/components/loading";
+import { ApiError } from "@common/components/error";
 
 type DailyOrders = {
   date: string;
@@ -33,9 +33,9 @@ const fetchData = async (): Promise<IDailOrderResponse> => {
 
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error('Data not found');
+      throw new Error("Data not found");
     } else {
-      throw new Error('Failed to fetch data');
+      throw new Error("Failed to fetch data");
     }
   }
   return response.json();
@@ -59,7 +59,7 @@ const DailyOrdersChartContainer = ({ data }: { data: IDailOrderResponse }) => {
   const theme = useMantineTheme();
 
   return (
-    <ResponsiveContainer width='100%' height='100%'>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart
         width={500}
         height={300}
@@ -71,50 +71,50 @@ const DailyOrdersChartContainer = ({ data }: { data: IDailOrderResponse }) => {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
+        <CartesianGrid strokeDasharray="3 3" />
         <Tooltip
           formatter={(value) => `${value}`}
-          labelFormatter={() => ''}
+          labelFormatter={() => ""}
           itemStyle={{ color: theme.colors.dark[9] }}
         />
         <g>
-          <g className='custom-p&l-number'>
+          <g className="custom-p&l-number">
             <text
-              x='10%'
-              y='9%'
+              x="10%"
+              y="9%"
               dy={+12}
               style={{
                 fontSize: 36,
-                fontWeight: 'bold',
+                fontWeight: "bold",
                 fill: theme.colors.green[7],
               }}
               width={200}
-              textAnchor='middle'
+              textAnchor="middle"
             >
               {data.total}
             </text>
           </g>
-          <g className='custom-upward-trend-icon'>
+          <g className="custom-upward-trend-icon">
             <svg
-              viewBox='0 0 25 25'
+              viewBox="0 0 25 25"
               height={80}
               width={80}
-              x='13%'
-              y='1%'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
+              x="13%"
+              y="1%"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d='M8 14.5L12.5 10L17 14.5'
+                d="M8 14.5L12.5 10L17 14.5"
                 stroke={theme.colors.green[5]}
-                stroke-width='1.5'
+                stroke-width="1.5"
               />
             </svg>
           </g>
         </g>
-        <Bar dataKey='value' fill={theme.colors.yellow[2]} />
-        <XAxis dataKey='name'>
-          <Label value='Daily Orders' offset={0} position='insideBottom' />
+        <Bar dataKey="value" fill={theme.colors.yellow[2]} />
+        <XAxis dataKey="name">
+          <Label value="Daily Orders" offset={0} position="insideBottom" />
         </XAxis>
       </BarChart>
     </ResponsiveContainer>

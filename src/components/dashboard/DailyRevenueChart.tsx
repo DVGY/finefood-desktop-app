@@ -1,5 +1,4 @@
 import { useQuery } from "@tanstack/react-query";
-import { ApiError } from "@common/components/error";
 import {
   LineChart,
   Line,
@@ -10,9 +9,9 @@ import {
   Label,
 } from "recharts";
 import { useMantineTheme } from "@mantine/core";
-import { DailyOrdersChart } from "./DailyOrdersChart";
-import { Loading } from "@common/components/loading";
 
+import { ApiError } from "@common/components/error";
+import { Loading } from "@common/components/loading";
 import { ResourceList } from "@common/route";
 import {
   QueryStringParams,
@@ -74,8 +73,6 @@ const DailyRevenuePresentation = () => {
   return <DailyRevenueChartContainer data={data} />;
 };
 
-console.log("sdafads");
-
 const DailyRevenueChartContainer = ({
   data,
 }: {
@@ -134,7 +131,7 @@ const DailyRevenueChartContainer = ({
               <path
                 d="M8 14.5L12.5 10L17 14.5"
                 stroke={theme.colors.green[5]}
-                stroke-width="1.5"
+                strokeWidth="1.5"
               />
             </svg>
           </g>

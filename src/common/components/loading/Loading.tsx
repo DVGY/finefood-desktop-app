@@ -1,5 +1,9 @@
-import { LoadingOverlay } from '@mantine/core';
+import { Loader, Center } from "@mantine/core";
 
 export const Loading = () => {
-  return <LoadingOverlay visible />;
+  return (
+    <Center>
+      <Loader />
+    </Center>
+  );
 };

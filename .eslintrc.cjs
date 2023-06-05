@@ -1,5 +1,6 @@
 module.exports = {
-  root: true,
+  // root: true,
+
   parser: "@typescript-eslint/parser",
   parserOptions: {
     ecmaVersion: 2021,
@@ -20,10 +21,11 @@ module.exports = {
     "plugin:react-hooks/recommended",
     "plugin:import/recommended",
     "plugin:import/typescript",
-    "plugin:no-console/recommended",
   ],
   rules: {
     // Add any additional rules or overrides here
+    "react/react-in-jsx-scope": "off",
+    "no-unused-vars": "error", // Show warnings for unused variables
     "no-console": "error", // Enforce error for console.log and related statements
     "import/order": [
       "error",
@@ -37,4 +39,14 @@ module.exports = {
       },
     ],
   },
+  settings: {
+    "import/resolver": {
+      typescript: {},
+    },
+  },
+  overrides: [
+    {
+      files: ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx"],
+    },
+  ],
 };
