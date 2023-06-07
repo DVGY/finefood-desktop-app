@@ -11,12 +11,12 @@ import {
 import { useMantineTheme } from "@mantine/core";
 
 import { ApiError } from "@common/components/error";
-import { Loading } from "@common/components/loading";
 import { ResourceList } from "@common/route";
 import {
   QueryStringParams,
   getFormattedQueryStringParams,
 } from "@common/react-query/utils";
+import { LoadingSkeleton } from "@common/components/loading";
 
 type DailyRevenue = {
   date: string;
@@ -64,7 +64,7 @@ const DailyRevenuePresentation = () => {
   );
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingSkeleton />;
   }
 
   if (isError) {
@@ -99,43 +99,24 @@ const DailyRevenueChartContainer = ({
           labelFormatter={() => ""}
           itemStyle={{ color: theme.colors.dark[9] }}
         />
-        {/*    Create SVG Icon
-         */}
-        <g>
-          <g className="custom-p&l-number">
-            <text
-              x="15%"
-              y="10%"
-              dy={+12}
-              style={{
-                fontSize: 36,
-                fontWeight: "bold",
-                fill: theme.colors.green[7],
-              }}
-              width={200}
-              textAnchor="middle"
-            >
-              ${(data.total / 1000).toFixed(1)}K
-            </text>
-          </g>
-          <g className="custom-upward-trend-icon">
-            <svg
-              viewBox="0 0 25 25"
-              height={100}
-              width={100}
-              x="20%"
-              y="0%"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M8 14.5L12.5 10L17 14.5"
-                stroke={theme.colors.green[5]}
-                strokeWidth="1.5"
-              />
-            </svg>
-          </g>
-        </g>
+        <svg
+          width="200"
+          height="100"
+          x="-5%"
+          y="-1%"
+          className="responsive-text"
+        >
+          <text
+            x="50%"
+            y="50%"
+            textAnchor="middle"
+            fontWeight="bold"
+            dominantBaseline="middle"
+          >
+            $ {(data.total / 1000).toFixed(1)} K
+          </text>
+          <path d="M100 20 L90 30 L110 30 Z" fill={theme.colors.green[7]} />
+        </svg>
 
         <Line
           type="monotone"

@@ -1,4 +1,4 @@
-import { useQuery } from '@tanstack/react-query';
+import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
   Bar,
@@ -7,12 +7,12 @@ import {
   ResponsiveContainer,
   XAxis,
   Label,
-} from 'recharts';
+} from "recharts";
+import { useMantineTheme } from "@mantine/core";
 
-import { ResourceList } from '@common/route';
-import { Loading } from '@common/components/loading';
-import { ApiError } from '@common/components/error';
-import { useMantineTheme } from '@mantine/core';
+import { ResourceList } from "@common/route";
+import { ApiError } from "@common/components/error";
+import { LoadingSkeleton } from "@common/components/loading";
 
 type NewCustomers = {
   date: string;
@@ -32,19 +32,19 @@ const fetchData = async (): Promise<IDailOrderResponse> => {
 
   if (!response.ok) {
     if (response.status === 404) {
-      throw new Error('Data not found');
+      throw new Error("Data not found");
     } else {
-      throw new Error('Failed to fetch data');
+      throw new Error("Failed to fetch data");
     }
   }
   return response.json();
 };
 
 const NewCustomersPresentation = () => {
-  const { data, isLoading, isError } = useQuery(['newCustomers'], fetchData);
+  const { data, isLoading, isError } = useQuery(["newCustomers"], fetchData);
 
   if (isLoading) {
-    return <Loading />;
+    return <LoadingSkeleton />;
   }
 
   if (isError) {
@@ -58,7 +58,7 @@ const NewCustomersChartContainer = ({ data }: { data: IDailOrderResponse }) => {
   const theme = useMantineTheme();
 
   return (
-    <ResponsiveContainer width='100%' height='100%'>
+    <ResponsiveContainer width="100%" height="100%">
       <BarChart
         width={500}
         height={300}
@@ -70,50 +70,33 @@ const NewCustomersChartContainer = ({ data }: { data: IDailOrderResponse }) => {
           bottom: 5,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
+        <CartesianGrid strokeDasharray="3 3" />
         <Tooltip
           formatter={(value) => `${value}`}
-          labelFormatter={() => ''}
+          labelFormatter={() => ""}
           itemStyle={{ color: theme.colors.dark[9] }}
         />
-        <g>
-          <g className='custom-p&l-number'>
-            <text
-              x='11%'
-              y='9%'
-              dy={+12}
-              style={{
-                fontSize: 36,
-                fontWeight: 'bold',
-                fill: theme.colors.green[7],
-              }}
-              width={200}
-              textAnchor='middle'
-            >
-              {data.trend} %
-            </text>
-          </g>
-          <g className='custom-upward-trend-icon'>
-            <svg
-              viewBox='0 0 25 25'
-              height={50}
-              width={50}
-              x='17%'
-              y='4%'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M8 14.5L12.5 10L17 14.5'
-                stroke={theme.colors.green[7]}
-                stroke-width='1.5'
-              />
-            </svg>
-          </g>
-        </g>
-        <Bar dataKey='value' fill={theme.colors.violet[4]} />
-        <XAxis dataKey='name'>
-          <Label value='New Customers' offset={0} position='insideBottom' />
+        <svg
+          width="200"
+          height="100"
+          x="-5%"
+          y="-1%"
+          className="responsive-text"
+        >
+          <text
+            x="50%"
+            y="50%"
+            textAnchor="middle"
+            fontWeight="bold"
+            dominantBaseline="middle"
+          >
+            {data.trend} %
+          </text>
+          <path d="M100 20 L90 30 L110 30 Z" fill={theme.colors.green[7]} />
+        </svg>
+        <Bar dataKey="value" fill={theme.colors.violet[4]} />
+        <XAxis dataKey="name">
+          <Label value="New Customers" offset={0} position="insideBottom" />
         </XAxis>
       </BarChart>
     </ResponsiveContainer>

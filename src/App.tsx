@@ -1,13 +1,15 @@
-import { createStyles, Container } from '@mantine/core';
-import './App.css';
-import { Route, Routes } from 'react-router-dom';
-import { Dashboard } from './pages/Dashboard';
-import { RouteList } from './common/route/routeList';
-import { Orders } from './pages/Orders';
+import "./App.css";
+
+import { createStyles, Container } from "@mantine/core";
+import { Route, Routes } from "react-router-dom";
+
+import { Dashboard } from "./pages/Dashboard";
+import { RouteList } from "./common/route/routeList";
+import { Orders } from "./pages/Orders";
 
 const useStyles = createStyles({
   container: {
-    height: '100%',
+    height: "100%",
     // backgroundColor: 'gray',
   },
 });

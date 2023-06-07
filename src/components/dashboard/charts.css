@@ -1,0 +1,20 @@
+.responsive-text {
+  font-size: 16px; /* Default font size */
+}
+
+@media (min-width: 480px) {
+  .responsive-text {
+    font-size: 16px; /* Adjust font size for even smaller screens */
+  }
+}
+
+@media (min-width: 768px) {
+  .responsive-text {
+    font-size: 18px; /* Adjust font size for smaller screens */
+  }
+}
+@media (min-width: 1280px) {
+  .responsive-text {
+    font-size: 24px; /* Adjust font size for smaller screens */
+  }
+}
