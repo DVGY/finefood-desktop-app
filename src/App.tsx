@@ -3,9 +3,8 @@ import "./App.css";
 import { createStyles, Container } from "@mantine/core";
 import { Route, Routes } from "react-router-dom";
 
-import { Dashboard } from "./pages/Dashboard";
-import { RouteList } from "./common/route/routeList";
-import { Orders } from "./pages/Orders";
+import { RouteList } from "@common/route";
+import { Orders, Dashboard } from "@pages/index";
 
 const useStyles = createStyles({
   container: {

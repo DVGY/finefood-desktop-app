@@ -1,6 +1,6 @@
-import { ResourceList } from './resourceList';
+import { ResourceList } from "./resourceList";
 
-export const enum RouteList {
+export enum RouteList {
   DASHBOARD = `/${ResourceList.DASHBOARD}`,
   ORDERS = `/${ResourceList.ORDERS}`,
   USERS = `/${ResourceList.USERS}`,
