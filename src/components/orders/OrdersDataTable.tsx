@@ -1,6 +1,14 @@
 import { useState, CSSProperties } from "react";
 
-import { MantineTheme, Skeleton, rem, useMantineTheme } from "@mantine/core";
+import {
+  MantineTheme,
+  Skeleton,
+  TextInput,
+  rem,
+  useMantineTheme,
+} from "@mantine/core";
+import { useDebouncedValue } from "@mantine/hooks";
+import { IconSearch } from "@tabler/icons-react";
 import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "mantine-datatable";
 
@@ -73,15 +81,23 @@ export const OrderDataTable = () => {
   const [page, setPaginationOptions] = useState({
     currentPage: 1,
     startPage: 0,
-    endPage: 10,
-    recordsPerPage: PAGE_SIZES[0],
+    endPage: 20,
+    recordsPerPage: PAGE_SIZES[2],
   });
+
+  const [searchFilters, setSearchFilter] = useState({
+    orderNumber: "",
+  });
+  const [debounced] = useDebouncedValue(searchFilters, 500);
+
+  const { orderNumber } = searchFilters;
 
   const { currentPage, startPage, endPage, recordsPerPage } = page;
 
   const { data, isLoading, isError } = useQuery(
-    ["orders", { _start: startPage, _end: endPage }],
-    () => fetchData({ _start: startPage, _end: endPage }),
+    ["orders", { _start: startPage, _end: endPage, q: debounced.orderNumber }],
+    () =>
+      fetchData({ _start: startPage, _end: endPage, q: debounced.orderNumber }),
     {
       keepPreviousData: true,
       staleTime: 5000,
@@ -117,7 +133,25 @@ export const OrderDataTable = () => {
   return (
     <DataTable
       columns={[
-        { accessor: "orderNumber" },
+        {
+          accessor: "orderNumber",
+          filter: (
+            <TextInput
+              label="orderNumber"
+              description="Show orders"
+              placeholder="Search orders..."
+              icon={<IconSearch size={16} />}
+              value={orderNumber}
+              onChange={(e) =>
+                setSearchFilter((prevState) => ({
+                  ...prevState,
+                  orderNumber: e.currentTarget.value,
+                }))
+              }
+            />
+          ),
+          filtering: orderNumber !== "",
+        },
         {
           accessor: "status",
           cellsStyle: ({ status }) => statusStyles(theme, status),
@@ -128,6 +162,7 @@ export const OrderDataTable = () => {
         { accessor: "products" },
         { accessor: "createdAt" },
       ]}
+      idAccessor="orderNumber"
       records={getOrders()}
       withBorder
       // No way to render infinte button ?

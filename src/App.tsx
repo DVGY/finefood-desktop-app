@@ -9,7 +9,6 @@ import { Orders, Dashboard } from "@pages/index";
 const useStyles = createStyles({
   container: {
     height: "100%",
-    // backgroundColor: 'gray',
   },
 });
 
@@ -20,6 +19,7 @@ function App() {
       <Routes>
         <Route path={RouteList.DASHBOARD} element={<Dashboard />} />
         <Route path={RouteList.ORDERS} element={<Orders />} />
+        <Route index element={<Dashboard />} />
       </Routes>
     </Container>
   );
