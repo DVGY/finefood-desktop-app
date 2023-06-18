@@ -1,3 +1,4 @@
+import { useMantineTheme } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
@@ -8,11 +9,10 @@ import {
   XAxis,
   Label,
 } from "recharts";
-import { useMantineTheme } from "@mantine/core";
 
-import { ResourceList } from "@common/route";
 import { ApiError } from "@common/components/error";
 import { LoadingSkeleton } from "@common/components/loading";
+import { ResourceList } from "@common/route";
 
 type NewCustomers = {
   date: string;
@@ -41,7 +41,10 @@ const fetchData = async (): Promise<IDailOrderResponse> => {
 };
 
 const NewCustomersPresentation = () => {
-  const { data, isLoading, isError } = useQuery(["newCustomers"], fetchData);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["newCustomers"],
+    queryFn: fetchData,
+  });
 
   if (isLoading) {
     return <LoadingSkeleton />;

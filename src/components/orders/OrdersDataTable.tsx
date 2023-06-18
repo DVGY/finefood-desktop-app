@@ -94,15 +94,20 @@ export const OrderDataTable = () => {
 
   const { currentPage, startPage, endPage, recordsPerPage } = page;
 
-  const { data, isLoading, isError } = useQuery(
-    ["orders", { _start: startPage, _end: endPage, q: debounced.orderNumber }],
-    () =>
-      fetchData({ _start: startPage, _end: endPage, q: debounced.orderNumber }),
-    {
-      keepPreviousData: true,
-      staleTime: 5000,
-    }
-  );
+  const { data, isLoading, isError } = useQuery({
+    queryKey: [
+      "orders",
+      { _start: startPage, _end: endPage, q: debounced.orderNumber },
+    ],
+    queryFn: () =>
+      fetchData({
+        _start: startPage,
+        _end: endPage,
+        q: debounced.orderNumber,
+      }),
+    keepPreviousData: true,
+    staleTime: 5000,
+  });
 
   const theme = useMantineTheme();
 
@@ -137,7 +142,7 @@ export const OrderDataTable = () => {
           accessor: "orderNumber",
           filter: (
             <TextInput
-              label="orderNumber"
+              label="Order Number"
               description="Show orders"
               placeholder="Search orders..."
               icon={<IconSearch size={16} />}

@@ -13,7 +13,7 @@ module.exports = {
     es2021: true,
     node: true,
   },
-  plugins: ["react", "react-hooks", "import"],
+  plugins: ["react", "react-hooks", "import", "@tanstack/query"],
   extends: [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -22,9 +22,12 @@ module.exports = {
     "plugin:import/typescript",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
   ],
   rules: {
     // Add any additional rules or overrides here
+    "@tanstack/query/exhaustive-deps": "error",
+    "@tanstack/query/prefer-query-object-syntax": "error",
     "react/react-in-jsx-scope": "off",
     "no-unused-vars": "off",
     "@typescript-eslint/no-unused-vars": "error",

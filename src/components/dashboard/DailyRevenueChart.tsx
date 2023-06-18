@@ -1,3 +1,4 @@
+import { useMantineTheme } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   LineChart,
@@ -8,15 +9,14 @@ import {
   XAxis,
   Label,
 } from "recharts";
-import { useMantineTheme } from "@mantine/core";
 
 import { ApiError } from "@common/components/error";
-import { ResourceList } from "@common/route";
+import { LoadingSkeleton } from "@common/components/loading";
 import {
   QueryStringParams,
   getFormattedQueryStringParams,
 } from "@common/react-query/utils";
-import { LoadingSkeleton } from "@common/components/loading";
+import { ResourceList } from "@common/route";
 
 type DailyRevenue = {
   date: string;
@@ -58,10 +58,10 @@ const DailyRevenuePresentation = () => {
     end,
   };
 
-  const { data, isLoading, isError } = useQuery(
-    ["dailyRevenue", queryStringParams],
-    () => fetchData(queryStringParams)
-  );
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["dailyRevenue", queryStringParams],
+    queryFn: () => fetchData(queryStringParams),
+  });
 
   if (isLoading) {
     return <LoadingSkeleton />;

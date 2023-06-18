@@ -1,5 +1,6 @@
 import "./charts.css";
 
+import { useMantineTheme } from "@mantine/core";
 import { useQuery } from "@tanstack/react-query";
 import {
   BarChart,
@@ -10,12 +11,11 @@ import {
   XAxis,
   Label,
 } from "recharts";
-import { useMantineTheme } from "@mantine/core";
 
-import { ResourceList } from "@common/route";
-import { dailyOrderQueryKey } from "@common/react-query";
-import { LoadingSkeleton } from "@common/components/loading";
 import { ApiError } from "@common/components/error";
+import { LoadingSkeleton } from "@common/components/loading";
+import { dailyOrderQueryKey } from "@common/react-query";
+import { ResourceList } from "@common/route";
 
 type DailyOrders = {
   date: string;
@@ -44,7 +44,10 @@ const fetchData = async (): Promise<IDailOrderResponse> => {
 };
 
 const DailyOrdersPresentation = () => {
-  const { data, isLoading, isError } = useQuery(dailyOrderQueryKey, fetchData);
+  const { data, isLoading, isError } = useQuery({
+    queryKey: dailyOrderQueryKey,
+    queryFn: fetchData,
+  });
 
   if (isLoading) {
     return <LoadingSkeleton />;
